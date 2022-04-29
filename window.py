@@ -7,7 +7,6 @@ from PySide6.QtCore import QTimer
 import numpy as np
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import random
 
 	
 class GlowneOkno(QWidget):
