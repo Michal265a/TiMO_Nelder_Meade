@@ -49,7 +49,7 @@ class GlowneOkno(QWidget):
 		
 		label = QLabel("- program wyznacza minimum funkcji",self)
 		label.move(215,35)
-		self.list0[0].append(label)
+		self.list0[3].append(label)
 				
 		label = QLabel("- zmienne wprowadzać w kolejności: x1, x2, x3, x4, x5",self)
 		label.move(215,55)
