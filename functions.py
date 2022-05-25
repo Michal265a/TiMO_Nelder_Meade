@@ -4,8 +4,7 @@ import numpy as np
 
 class Math_data():
 	given_fcn = ""
-	#variables = -1
-	variables = 3 #do testów
+	variables = None
 	
 	a_vec = None
 	b_vec = None
@@ -27,8 +26,8 @@ class Math_data():
 		err_mess = ""
 		rdn = np.random.rand(5,1)
 		try:
-			fcn = parse_expr(self.given_fcn, transformations='all', 
-				local_dict={'x1':rdn[0], 'x2':rdn[1], 'x3':rdn[2], 'x4':rdn[3], 'x5':rdn[4]})
+			fcn = parse_expr(self.given_fcn, transformations='all', local_dict=\
+	{'x1':rdn.item(0), 'x2':rdn.item(1), 'x3':rdn.item(2), 'x4':rdn.item(3), 'x5':rdn.item(4)})
 			res = eval(str(fcn))
 		except:
 			correct = False
@@ -149,8 +148,8 @@ class Math_data():
 			res_H1=res[H1]
 			#wartości x_vec, fcn, x_plot do logów
 			if self.iters ==1:
-				self.x_iters = np.array([self.x_vec_simpl[H,:]])
-				self.f_iters = np.array([res[H]])
+				self.x_iters = np.array([self.x_vec_simpl[L,:]])
+				self.f_iters = np.array([res[L]])
 				if self.variables ==2:
 					elem = self.x_vec_simpl
 					elem = np.append(elem,[self.x_vec_simpl[0,:]],axis=0)
@@ -158,8 +157,8 @@ class Math_data():
 					self.x_plot = np.append(self.x_plot,[elem],axis=0)
 					self.x_plot = np.append(self.x_plot,[elem],axis=0)
 			else:
-				self.x_iters = np.append(self.x_iters, [self.x_vec_simpl[H,:]],axis=0)
-				self.f_iters = np.append(self.f_iters, [res[H]])
+				self.x_iters = np.append(self.x_iters, [self.x_vec_simpl[L,:]],axis=0)
+				self.f_iters = np.append(self.f_iters, [res[L]])
 				if self.variables ==2:
 					elem = self.x_vec_simpl
 					elem = np.append(elem,[self.x_vec_simpl[0,:]],axis=0)
@@ -228,8 +227,8 @@ class Math_data():
 		H=tab[-1]
 		res_H=res[H]
 		#wartości do logów
-		self.x_iters = np.append(self.x_iters, [self.x_vec_simpl[H,:]],axis=0)
-		self.f_iters = np.append(self.f_iters, [res[H]])
+		self.x_iters = np.append(self.x_iters, [self.x_vec_simpl[L,:]],axis=0)
+		self.f_iters = np.append(self.f_iters, [res[L]])
 		if self.variables ==2:
 			elem = self.x_vec_simpl
 			elem = np.append(elem,[self.x_vec_simpl[0,:]],axis=0)
