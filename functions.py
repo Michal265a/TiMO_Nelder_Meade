@@ -29,6 +29,8 @@ class Math_data():
 			fcn = parse_expr(self.given_fcn, transformations='all', local_dict=\
 	{'x1':rdn.item(0), 'x2':rdn.item(1), 'x3':rdn.item(2), 'x4':rdn.item(3), 'x5':rdn.item(4)})
 			res = eval(str(fcn))
+			if not ((type(res) is float) or (type(res) is int)):
+				raise
 		except:
 			correct = False
 			err_mess = "Błąd: nierozpoznane wyrażenie"
@@ -79,6 +81,11 @@ class Math_data():
 			correct=False
 			err_mess = "Błąd konwersji paramatru b{:d} do liczby".format(i+1)
 			return correct, err_mess
+		for i in range(self.variables):
+			if self.a_vec[i] >= self.b_vec[i]:
+				correct=False
+				err_mess = "Błąd: parametr a{:d} wiekszy od b{:d}".format(i+1,i+1)
+				return correct, err_mess
 		params=["ε","L","α","β","γ"]
 		try:
 			i=0

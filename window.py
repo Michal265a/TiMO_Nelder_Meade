@@ -23,7 +23,7 @@ class GlowneOkno(QWidget):
 
 	def __init__(self):
 		super().__init__()
-		self.setFixedSize(600,705)
+		self.setFixedSize(600,725)
 		self.setWindowTitle("Optymalizacja - Nelder-Meade")
 		self.show()	
 		self.show_0()
@@ -50,29 +50,33 @@ class GlowneOkno(QWidget):
 		label = QLabel("- program wyznacza minimum funkcji",self)
 		label.move(215,35)
 		self.list0[3].append(label)
-				
-		label = QLabel("- zmienne wprowadzać w kolejności: x1, x2, x3, x4, x5",self)
+		
+		label = QLabel("- liczby dziesiętne wprowadzać z kropką '.'",self)
 		label.move(215,55)
 		self.list0[3].append(label)
 		
-		label = QLabel("- w miarę możliwości nie omijać znaku mnożenia (*)",self)
+		label = QLabel("- zmienne wprowadzać w kolejności: x1, x2, x3, x4, x5",self)
 		label.move(215,75)
 		self.list0[3].append(label)
 		
-		label = QLabel("- logarytm naturalny z a: ln(a), log(a)",self)
+		label = QLabel("- w miarę możliwości nie omijać znaku mnożenia (*)",self)
 		label.move(215,95)
 		self.list0[3].append(label)
 		
-		label = QLabel("- logarytm o podstawie a z b: log(b,a)",self)
+		label = QLabel("- logarytm naturalny z a: ln(a), log(a)",self)
 		label.move(215,115)
 		self.list0[3].append(label)
 		
-		label = QLabel("- wartość bezwzględna z a: abs(a)",self)
+		label = QLabel("- logarytm o podstawie a z b: log(b,a)",self)
 		label.move(215,135)
 		self.list0[3].append(label)
 		
-		label = QLabel("- dozwolone użycie tylko nawiasów okrągłych ()",self)
+		label = QLabel("- wartość bezwzględna z a: abs(a)",self)
 		label.move(215,155)
+		self.list0[3].append(label)
+		
+		label = QLabel("- dozwolone użycie tylko nawiasów okrągłych ()",self)
+		label.move(215,175)
 		self.list0[3].append(label)
 		
 		for elem in self.list0:
@@ -82,29 +86,29 @@ class GlowneOkno(QWidget):
 		
 	def show_1(self):
 		label = QLabel("Wykryto {:d} zmienne/ych".format(self.data.variables),self)
-		label.move(5,200)
-		self.list1[0].append(label)
-		
-		label = QLabel("Kostka (a ≤ x ≤ b):",self)
 		label.move(5,220)
 		self.list1[0].append(label)
 		
+		label = QLabel("Kostka (a ≤ x ≤ b):",self)
+		label.move(5,240)
+		self.list1[0].append(label)
+		
 		label = QLabel("Parametry:",self)
-		label.move(305,220)
+		label.move(305,240)
 		self.list1[0].append(label)
 		
 		for i in range(self.data.variables):
 			line = QLineEdit("-5",self)
-			line.move(5,240+30*i)
+			line.move(5,260+30*i)
 			line.setFixedWidth(75)
 			self.list1[1].append(line)
 			
 			label = QLabel("≤ x{:d} ≤".format(i+1),self)
-			label.move(85,245+30*i)
+			label.move(85,265+30*i)
 			self.list1[2].append(label)
 			
 			line = QLineEdit("5",self)
-			line.move(130,240+30*i)
+			line.move(130,260+30*i)
 			line.setFixedWidth(75)
 			self.list1[3].append(line)
 		
@@ -112,16 +116,16 @@ class GlowneOkno(QWidget):
 		vals=["0.001","200","1","0.5","2"]
 		for i in range(5):
 			label = QLabel(params[i],self)
-			label.move(325,245+30*i)
+			label.move(325,265+30*i)
 			self.list1[4].append(label)
 			
 			line = QLineEdit(vals[i],self)
-			line.move(345,240+30*i)
+			line.move(345,260+30*i)
 			line.setFixedWidth(75)
 			self.list1[5].append(line)
 			
 		button = QPushButton("Oblicz",self)
-		button.move(500,210)
+		button.move(500,230)
 		self.list1[6].append(button)
 		self.list1[6][0].clicked.connect(self.but_oblicz)
 		
@@ -140,7 +144,7 @@ class GlowneOkno(QWidget):
 		
 	def show_2(self):
 		label = QLabel("Znaleziono rozwiązanie w {:d} krokach".format(self.data.iters-1),self)
-		label.move(5,410)
+		label.move(5,430)
 		self.list2[0].append(label)
 		
 		solution = '['
@@ -149,27 +153,27 @@ class GlowneOkno(QWidget):
 			int(-np.floor(np.log10(self.data.max_err))+1))
 		solution = solution[:-1]+']'
 		label = QLabel("Znaleziony punkt: " + solution,self)
-		label.move(5,430)
+		label.move(5,450)
 		self.list2[0].append(label)
 		
 		label = QLabel("Wartość funkcji: {:.{:d}f}".format(self.data.f_iters[-1],
 		int(-np.floor(np.log10(self.data.max_err))+1)),self)
-		label.move(5,450)
+		label.move(5,470)
 		self.list2[0].append(label)
 		
 		label = QLabel("Wartość funkcji błędu: {:.{:d}f}".format(self.data.e_iters[-1],\
 		int(-np.floor(np.log10(self.data.max_err))+1)),self)
-		label.move(5,470)
+		label.move(5,490)
 		self.list2[0].append(label)
 		
 		if self.data.variables == 2:
 			button = QPushButton("Pokaż wykres",self)
-			button.move(480,410)
+			button.move(480,430)
 			self.list2[1].append(button)
 			self.list2[1][0].clicked.connect(self.but_wykres)
 		
 		label = QLabel("Kolejne kroki algorytmu:",self)
-		label.move(5,500)
+		label.move(5,520)
 		self.list2[0].append(label)
 		
 		table = QTableWidget(self.data.iters,3,self)
@@ -178,7 +182,7 @@ class GlowneOkno(QWidget):
 		table.setColumnWidth(0,370)
 		table.setColumnWidth(1,80)
 		table.setColumnWidth(2,80)
-		table.move(10,525)
+		table.move(10,545)
 		table.setFixedSize(580,170)
 		for i in range(self.data.iters):
 			text = '['
@@ -223,7 +227,7 @@ class GlowneOkno(QWidget):
 			self.show_1()
 		else:
 			self.err_label[0] = QLabel(err,self)
-			self.err_label[0].move(50,180)
+			self.err_label[0].move(50,200)
 			self.err_label[0].setStyleSheet("color: red")
 			self.err_label[0].show()
 	
@@ -249,7 +253,7 @@ class GlowneOkno(QWidget):
 			self.show_2()
 		else:
 			self.err_label[1] = QLabel(err,self)
-			self.err_label[1].move(50,390)
+			self.err_label[1].move(50,410)
 			self.err_label[1].setStyleSheet("color: red")
 			self.err_label[1].show()
 
